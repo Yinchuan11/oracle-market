@@ -46,21 +46,6 @@ export default function PrivacyWarning() {
           </AlertDialogTitle>
           <AlertDialogDescription className="space-y-4 text-left">
             <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <Eye className="h-5 w-5 text-red-500 mt-0.5" />
-                <div>
-                  <p className="font-semibold text-foreground">IP-Adresse wird geloggt</p>
-                  <p className="text-sm">Ihre IP-Adresse wird von Supabase für 7-90 Tage gespeichert.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Globe className="h-5 w-5 text-orange-500 mt-0.5" />
-                <div>
-                  <p className="font-semibold text-foreground">Bitcoin-Transaktionen sind öffentlich</p>
-                  <p className="text-sm">Alle Bitcoin-Transaktionen sind auf der Blockchain einsehbar.</p>
-                </div>
-              </div>
 
               {!isUsingTor && (
                 <Alert className="border-red-200 bg-red-50 dark:bg-red-950/20">
@@ -84,7 +69,7 @@ export default function PrivacyWarning() {
               <ul className="text-sm mt-2 space-y-1">
                 <li>• Tor Browser oder VPN verwenden</li>
                 <li>• Keine echten Namen als Benutzername</li>
-                <li>• Bitcoin über Mixing Services senden</li>
+                
                 <li>• Regelmäßig Account löschen</li>
               </ul>
             </div>
