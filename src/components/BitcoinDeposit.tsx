@@ -21,8 +21,8 @@ export function BitcoinDeposit() {
   const copyAddress = async () => {
     await navigator.clipboard.writeText(currentAddress);
     toast({
-      title: "Kopiert",
-      description: `${selectedCrypto === "bitcoin" ? "Bitcoin" : "Litecoin"}-Adresse wurde in die Zwischenablage kopiert`,
+      title: "Copied",
+      description: `${selectedCrypto === "bitcoin" ? "Bitcoin" : "Litecoin"} address copied to clipboard`,
     });
   };
 
@@ -35,12 +35,12 @@ export function BitcoinDeposit() {
           ) : (
             <Coins className="h-5 w-5 text-gray-500" />
           )}
-          Kryptowährung Einzahlung
+          Cryptocurrency Deposit
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-4">
-          <Label className="text-sm font-medium">Kryptowährung auswählen:</Label>
+          <Label className="text-sm font-medium">Select Cryptocurrency:</Label>
           <RadioGroup 
             value={selectedCrypto} 
             onValueChange={(value) => setSelectedCrypto(value as "bitcoin" | "litecoin")}
@@ -73,7 +73,7 @@ export function BitcoinDeposit() {
         
         <div className="space-y-2">
           <label className="text-sm font-medium">
-            Ihre {selectedCrypto === "bitcoin" ? "Bitcoin" : "Litecoin"}-Adresse:
+            Your {selectedCrypto === "bitcoin" ? "Bitcoin" : "Litecoin"} Address:
           </label>
           <div className="flex items-center gap-2">
             <code className="flex-1 p-2 bg-muted rounded text-sm break-all">
