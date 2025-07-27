@@ -3,10 +3,12 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Shield, Eye, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function PrivacyWarning() {
   const [showWarning, setShowWarning] = useState(false);
   const [isUsingTor, setIsUsingTor] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     // Check if user has already seen the warning
@@ -30,9 +32,15 @@ export default function PrivacyWarning() {
   };
 
   const handleGetTorGuide = () => {
-    // Close modal and redirect to settings page with Tor guide
     setShowWarning(false);
-    window.location.href = '/settings#privacy-guide';
+    
+    if (!user) {
+      // Redirect to auth with return URL
+      window.location.href = '/auth?redirect=/settings#privacy-guide';
+    } else {
+      // User is logged in, go directly to settings
+      window.location.href = '/settings#privacy-guide';
+    }
   };
 
   if (!showWarning) return null;
