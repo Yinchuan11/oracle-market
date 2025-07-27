@@ -56,7 +56,7 @@ export default function PrivacyWarning() {
         <AlertDialogHeader>
           <AlertDialogTitle className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-yellow-500" />
-            Privatsphäre & Sicherheitshinweis
+            Privacy & Security Notice
           </AlertDialogTitle>
           <AlertDialogDescription className="space-y-4 text-left">
             <div className="space-y-3">
@@ -64,7 +64,7 @@ export default function PrivacyWarning() {
               {!isUsingTor && (
                 <Alert className="border-red-200 bg-red-50 dark:bg-red-950/20">
                   <AlertDescription className="text-red-800 dark:text-red-200">
-                    <strong>Warnung:</strong> Sie nutzen keinen Tor Browser. Ihre echte IP-Adresse ist sichtbar.
+                    <strong>Warning:</strong> You are not using Tor Browser. Your real IP address is visible.
                   </AlertDescription>
                 </Alert>
               )}
@@ -72,29 +72,29 @@ export default function PrivacyWarning() {
               {isUsingTor && (
                 <Alert className="border-green-200 bg-green-50 dark:bg-green-950/20">
                   <AlertDescription className="text-green-800 dark:text-green-200">
-                    <strong>Gut:</strong> Tor Browser erkannt. Ihre IP ist besser geschützt.
+                    <strong>Good:</strong> Tor Browser detected. Your IP is better protected.
                   </AlertDescription>
                 </Alert>
               )}
             </div>
 
             <div className="border-t pt-3">
-              <p className="text-sm font-medium">Empfohlene Sicherheitsmaßnahmen:</p>
+              <p className="text-sm font-medium">Recommended Security Measures:</p>
               <ul className="text-sm mt-2 space-y-1">
-                <li>• Tor Browser oder VPN verwenden</li>
-                <li>• Keine echten Namen als Benutzername</li>
+                <li>• Use Tor Browser or VPN</li>
+                <li>• Avoid real names as username</li>
                 
-                <li>• Regelmäßig Account löschen</li>
+                <li>• Delete account regularly</li>
               </ul>
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="flex-col sm:flex-row gap-2">
           <Button variant="outline" onClick={handleGetTorGuide} className="w-full sm:w-auto">
-            Sicherheitsanleitung anzeigen
+            View Security Guide
           </Button>
           <AlertDialogAction onClick={handleAcceptRisk} className="w-full sm:w-auto">
-            Verstanden, Risiko akzeptieren
+            Understood, Accept Risk
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

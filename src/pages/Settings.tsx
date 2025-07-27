@@ -37,16 +37,16 @@ export default function Settings() {
       await signOut();
       
       toast({
-        title: 'Konto gelöscht',
-        description: 'Ihr Konto wurde erfolgreich gelöscht.',
+        title: 'Account Deleted',
+        description: 'Your account has been successfully deleted.',
       });
 
       navigate('/auth');
     } catch (error) {
       console.error('Error deleting account:', error);
       toast({
-        title: 'Fehler',
-        description: 'Konto konnte nicht gelöscht werden.',
+        title: 'Error',
+        description: 'Account could not be deleted.',
         variant: 'destructive',
       });
     } finally {
@@ -64,9 +64,9 @@ export default function Settings() {
           className="flex items-center gap-2"
         >
           <ArrowLeft className="h-4 w-4" />
-          Zurück
+          Back
         </Button>
-        <h1 className="text-3xl font-bold">Einstellungen</h1>
+        <h1 className="text-3xl font-bold">Settings</h1>
       </div>
 
       <div className="space-y-6">
@@ -75,17 +75,17 @@ export default function Settings() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               {theme === 'light' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              Darstellung
+              Appearance
             </CardTitle>
             <CardDescription>
-              Wählen Sie zwischen hellem und dunklem Modus
+              Choose between light and dark mode
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center justify-between">
               <Label htmlFor="theme-toggle" className="flex items-center gap-2">
                 <Sun className="h-4 w-4" />
-                Hell
+                Light
               </Label>
               <Switch
                 id="theme-toggle"
@@ -94,7 +94,7 @@ export default function Settings() {
               />
               <Label htmlFor="theme-toggle" className="flex items-center gap-2">
                 <Moon className="h-4 w-4" />
-                Dunkel
+                Dark
               </Label>
             </div>
           </CardContent>
@@ -105,24 +105,24 @@ export default function Settings() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Shield className="h-5 w-5" />
-              Privatsphäre & Anonymität
+              Privacy & Anonymity
             </CardTitle>
             <CardDescription>
-              Anleitungen zum anonymen und sicheren Nutzen der Plattform
+              Guidelines for anonymous and secure platform usage
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-4">
               <div>
-                <h4 className="font-semibold mb-2">1. Tor Browser verwenden</h4>
+                <h4 className="font-semibold mb-2">1. Use Tor Browser</h4>
                 <p className="text-sm text-muted-foreground mb-3">
-                  Der Tor Browser leitet Ihren Traffic über mehrere Server um und verschleiert Ihre IP-Adresse.
+                  Tor Browser routes your traffic through multiple servers and obscures your IP address.
                 </p>
                 <div className="flex gap-2">
                   <Button variant="outline" size="sm" asChild>
                     <a href="https://www.torproject.org/download/" target="_blank" rel="noopener noreferrer">
                       <Download className="h-4 w-4 mr-2" />
-                      Tor Browser herunterladen
+                      Download Tor Browser
                       <ExternalLink className="h-3 w-3 ml-1" />
                     </a>
                   </Button>
@@ -130,41 +130,41 @@ export default function Settings() {
               </div>
 
               <div>
-                <h4 className="font-semibold mb-2">2. VPN-Anbieter</h4>
+                <h4 className="font-semibold mb-2">2. VPN Providers</h4>
                 <p className="text-sm text-muted-foreground mb-3">
-                  Empfohlene VPN-Anbieter für zusätzliche Anonymität:
+                  Recommended VPN providers for additional anonymity:
                 </p>
                 <ul className="text-sm space-y-1 ml-4">
-                  <li>• <strong>Mullvad:</strong> Keine Logs, anonyme Bezahlung möglich</li>
-                  <li>• <strong>ProtonVPN:</strong> Schweizer Anbieter, starke Verschlüsselung</li>
-                  <li>• <strong>IVPN:</strong> No-logs Policy, anonyme Accounts</li>
+                  <li>• <strong>Mullvad:</strong> No logs, anonymous payment possible</li>
+                  <li>• <strong>ProtonVPN:</strong> Swiss provider, strong encryption</li>
+                  <li>• <strong>IVPN:</strong> No-logs policy, anonymous accounts</li>
                 </ul>
               </div>
 
               <div>
-                <h4 className="font-semibold mb-2">3. Bitcoin-Anonymität</h4>
+                <h4 className="font-semibold mb-2">3. Bitcoin Anonymity</h4>
                 <p className="text-sm text-muted-foreground mb-3">
-                  Bitcoin-Transaktionen sind öffentlich einsehbar. Verwenden Sie:
+                  Bitcoin transactions are publicly visible. Use:
                 </p>
                 <ul className="text-sm space-y-1 ml-4">
                   <li>• <strong>Coin-Mixing Services:</strong> Wasabi Wallet, Samourai Whirlpool</li>
-                  <li>• <strong>Neue Adressen:</strong> Für jede Transaktion neue Bitcoin-Adresse</li>
-                  <li>• <strong>Monero:</strong> Als alternative Kryptowährung (falls unterstützt)</li>
+                  <li>• <strong>New Addresses:</strong> Use new Bitcoin address for each transaction</li>
+                  <li>• <strong>Monero:</strong> As alternative cryptocurrency (if supported)</li>
                 </ul>
               </div>
 
               <div>
-                <h4 className="font-semibold mb-2">4. Verhalten auf der Plattform</h4>
+                <h4 className="font-semibold mb-2">4. Platform Behavior</h4>
                 <ul className="text-sm space-y-1 ml-4">
-                  <li>• Keine echten Namen als Benutzername verwenden</li>
-                  <li>• Regelmäßig Account löschen und neu erstellen</li>
-                  <li>• Keine wiederverwendbaren Passwörter</li>
-                  <li>• Browser-Daten nach jeder Session löschen</li>
+                  <li>• Do not use real names as username</li>
+                  <li>• Delete and recreate account regularly</li>
+                  <li>• Do not reuse passwords</li>
+                  <li>• Clear browser data after each session</li>
                 </ul>
               </div>
 
               <div>
-                <h4 className="font-semibold mb-2">5. Zusätzliche Tools</h4>
+                <h4 className="font-semibold mb-2">5. Additional Tools</h4>
                 <div className="flex flex-wrap gap-2">
                   <Button variant="outline" size="sm" asChild>
                     <a href="https://tails.boum.org/" target="_blank" rel="noopener noreferrer">
@@ -189,10 +189,10 @@ export default function Settings() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Trash2 className="h-5 w-5" />
-              Konto-Verwaltung
+              Account Management
             </CardTitle>
             <CardDescription>
-              Verwalten Sie Ihr Benutzerkonto
+              Manage your user account
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -200,25 +200,25 @@ export default function Settings() {
               <AlertDialogTrigger asChild>
                 <Button variant="destructive" className="w-full">
                   <Trash2 className="h-4 w-4 mr-2" />
-                  Konto löschen
+                  Delete Account
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Sind Sie sicher?</AlertDialogTitle>
+                  <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    Diese Aktion kann nicht rückgängig gemacht werden. Ihr Konto, 
-                    alle Ihre Daten und Ihre Bitcoin-Adresse werden dauerhaft gelöscht.
+                    This action cannot be undone. Your account, 
+                    all your data and your Bitcoin address will be permanently deleted.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Abbrechen</AlertDialogCancel>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
                   <AlertDialogAction
                     onClick={handleDeleteAccount}
                     disabled={deletingAccount}
                     className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                   >
-                    {deletingAccount ? 'Wird gelöscht...' : 'Konto löschen'}
+                    {deletingAccount ? 'Deleting...' : 'Delete Account'}
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
