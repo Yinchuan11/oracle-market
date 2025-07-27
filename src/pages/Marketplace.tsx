@@ -55,6 +55,7 @@ const Marketplace = () => {
     fetchBtcPrice();
     fetchLtcPrice();
     fetchUserCount();
+    fetchOnlineUsers();
     
     // Set up real-time listener for user count
     const userCountChannel = supabase
@@ -67,34 +68,20 @@ const Marketplace = () => {
       )
       .subscribe();
 
-    // Set up presence tracking for online users
-    const presenceChannel = supabase
-      .channel('marketplace-presence')
-      .on('presence', { event: 'sync' }, () => {
-        const state = presenceChannel.presenceState();
-        setOnlineUsers(Object.keys(state).length);
-      })
-      .on('presence', { event: 'join' }, ({ key, newPresences }) => {
-        const state = presenceChannel.presenceState();
-        setOnlineUsers(Object.keys(state).length);
-      })
-      .on('presence', { event: 'leave' }, ({ key, leftPresences }) => {
-        const state = presenceChannel.presenceState();
-        setOnlineUsers(Object.keys(state).length);
-      })
-      .subscribe(async (status) => {
-        if (status === 'SUBSCRIBED' && user) {
-          await presenceChannel.track({
-            user_id: user.id,
-            username: profile?.username || 'Anonymous',
-            online_at: new Date().toISOString(),
-          });
+    // Set up real-time listener for online users
+    const onlineUsersChannel = supabase
+      .channel('online-users-changes')
+      .on('postgres_changes', 
+        { event: '*', schema: 'public', table: 'user_presence' }, 
+        () => {
+          fetchOnlineUsers();
         }
-      });
+      )
+      .subscribe();
       
     return () => {
       supabase.removeChannel(userCountChannel);
-      supabase.removeChannel(presenceChannel);
+      supabase.removeChannel(onlineUsersChannel);
     };
   }, [user, profile]);
 
@@ -150,6 +137,20 @@ const Marketplace = () => {
     }
 
     setUserCount(count || 0);
+  };
+
+  const fetchOnlineUsers = async () => {
+    const { count, error } = await supabase
+      .from('user_presence')
+      .select('*', { count: 'exact', head: true })
+      .eq('is_online', true);
+    
+    if (error) {
+      console.error('Error fetching online users:', error);
+      return;
+    }
+
+    setOnlineUsers(count || 0);
   };
 
   const fetchBtcPrice = async () => {
