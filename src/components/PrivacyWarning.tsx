@@ -30,7 +30,8 @@ export default function PrivacyWarning() {
   };
 
   const handleGetTorGuide = () => {
-    // Redirect to settings page with Tor guide
+    // Close modal and redirect to settings page with Tor guide
+    setShowWarning(false);
     window.location.href = '/settings#privacy-guide';
   };
 
