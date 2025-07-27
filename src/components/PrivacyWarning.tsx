@@ -18,14 +18,19 @@ export default function PrivacyWarning() {
     const hasSeenWarning = localStorage.getItem('oracle-privacy-warning-seen');
     
     if (!hasSeenWarning) {
-      // Check for Tor Browser
-      const userAgent = navigator.userAgent;
-      const isTorBrowser = userAgent.includes('Tor') || 
-                          userAgent.includes('Firefox') && userAgent.includes('rv:') && 
-                          !userAgent.includes('Chrome');
+      // Small delay to ensure component is properly mounted and user state is set
+      const timer = setTimeout(() => {
+        // Check for Tor Browser
+        const userAgent = navigator.userAgent;
+        const isTorBrowser = userAgent.includes('Tor') || 
+                            userAgent.includes('Firefox') && userAgent.includes('rv:') && 
+                            !userAgent.includes('Chrome');
+        
+        setIsUsingTor(isTorBrowser);
+        setShowWarning(true);
+      }, 100);
       
-      setIsUsingTor(isTorBrowser);
-      setShowWarning(true);
+      return () => clearTimeout(timer);
     }
   }, [user]);
 
