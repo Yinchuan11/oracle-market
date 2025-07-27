@@ -112,13 +112,6 @@ export default function Settings() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <Alert className="border-yellow-200 bg-yellow-50 dark:bg-yellow-950/20">
-              <Eye className="h-4 w-4" />
-              <AlertDescription className="text-yellow-800 dark:text-yellow-200">
-                <strong>Wichtig:</strong> Ihre IP-Adresse wird bei jeder Anfrage geloggt und für 7-90 Tage gespeichert.
-              </AlertDescription>
-            </Alert>
-
             <div className="space-y-4">
               <div>
                 <h4 className="font-semibold mb-2">1. Tor Browser verwenden</h4>

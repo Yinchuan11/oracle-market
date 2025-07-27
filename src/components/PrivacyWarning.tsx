@@ -11,6 +11,9 @@ export default function PrivacyWarning() {
   const { user } = useAuth();
 
   useEffect(() => {
+    // Only show warning for logged in users
+    if (!user) return;
+    
     // Check if user has already seen the warning
     const hasSeenWarning = localStorage.getItem('oracle-privacy-warning-seen');
     
@@ -24,7 +27,7 @@ export default function PrivacyWarning() {
       setIsUsingTor(isTorBrowser);
       setShowWarning(true);
     }
-  }, []);
+  }, [user]);
 
   const handleAcceptRisk = () => {
     localStorage.setItem('oracle-privacy-warning-seen', 'true');
