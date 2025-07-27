@@ -35,6 +35,8 @@ export default function PrivacyWarning() {
   };
 
   const handleGetTorGuide = () => {
+    // Mark warning as seen so it doesn't show again
+    localStorage.setItem('oracle-privacy-warning-seen', 'true');
     setShowWarning(false);
     
     if (!user) {
