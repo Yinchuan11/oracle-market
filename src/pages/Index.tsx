@@ -3,6 +3,8 @@ import { useAuth } from '@/contexts/AuthContext';
 
 const Index = () => {
   const { user, loading } = useAuth();
+  
+  console.log('Index component loaded:', { user: !!user, loading });
 
   if (loading) {
     return (
