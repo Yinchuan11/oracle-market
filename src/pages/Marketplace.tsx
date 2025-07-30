@@ -49,13 +49,20 @@ const Marketplace = () => {
   
   const { cartItems, addToCart, updateQuantity, removeItem, clearCart, getCartItemCount } = useCart();
 
+  // Generate fake online user count between 90-143
+  const generateFakeOnlineUsers = () => {
+    return Math.floor(Math.random() * (143 - 90 + 1)) + 90;
+  };
+
   useEffect(() => {
     fetchProducts();
     fetchCategories();
     fetchBtcPrice();
     fetchLtcPrice();
     fetchUserCount();
-    fetchOnlineUsers();
+    
+    // Initialize fake online users
+    setOnlineUsers(generateFakeOnlineUsers());
     
     // Set up real-time listener for user count
     const userCountChannel = supabase
@@ -68,20 +75,14 @@ const Marketplace = () => {
       )
       .subscribe();
 
-    // Set up real-time listener for online users
-    const onlineUsersChannel = supabase
-      .channel('online-users-changes')
-      .on('postgres_changes', 
-        { event: '*', schema: 'public', table: 'user_presence' }, 
-        () => {
-          fetchOnlineUsers();
-        }
-      )
-      .subscribe();
+    // Update fake online users every 4 minutes (240 seconds)
+    const onlineUsersInterval = setInterval(() => {
+      setOnlineUsers(generateFakeOnlineUsers());
+    }, 240000);
       
     return () => {
       supabase.removeChannel(userCountChannel);
-      supabase.removeChannel(onlineUsersChannel);
+      clearInterval(onlineUsersInterval);
     };
   }, [user, profile]);
 
@@ -139,19 +140,7 @@ const Marketplace = () => {
     setUserCount(count || 0);
   };
 
-  const fetchOnlineUsers = async () => {
-    const { count, error } = await supabase
-      .from('user_presence')
-      .select('*', { count: 'exact', head: true })
-      .eq('is_online', true);
-    
-    if (error) {
-      console.error('Error fetching online users:', error);
-      return;
-    }
-
-    setOnlineUsers(count || 0);
-  };
+  // Removed fetchOnlineUsers function - now using fake data
 
   const fetchBtcPrice = async () => {
     try {
